@@ -5,7 +5,6 @@
 #define DEFAULT_MIN_DEPTH 10
 
 // includes
-#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -15,16 +14,13 @@ using namespace std;
 // main function
 int main(int argc, char* argv[]) {
     // parse user args
-    int MIN_DEPTH;
+    unsigned long MIN_DEPTH;
     if(argc == 3) {
         MIN_DEPTH = DEFAULT_MIN_DEPTH;
     } else if(argc == 4) {
-        MIN_DEPTH = atoi(argv[3]);
-        if(MIN_DEPTH == 0) {
-            cerr << "ERROR: Invalid minimum depth threshold: " << argv[3] << endl; exit(1);
-        }
+        MIN_DEPTH = stoul(string(argv[3]));
     } else {
-        cerr << "USAGE: " << argv[0] << " <input_depth_file> <output_file> [min_depth=10]" << endl; exit(1);
+        cerr << "USAGE: " << argv[0] << " <input_depth_file> <output_file> [min_depth=" << DEFAULT_MIN_DEPTH << ']' << endl; exit(1);
     }
 
     // open input and output files
@@ -35,8 +31,8 @@ int main(int argc, char* argv[]) {
     string line;
     string tmp;
     string chrom;
-    int pos;
-    int depth;
+    unsigned long pos;
+    unsigned long depth;
 
     // compute low-depth regions
     bool mask = false;
@@ -44,8 +40,8 @@ int main(int argc, char* argv[]) {
         // parse next line
         istringstream ss(line);
         getline(ss, chrom, '\t');
-        getline(ss, tmp, '\t'); pos = stoi(tmp);
-        getline(ss, tmp, '\n'); depth = stoi(tmp);
+        getline(ss, tmp, '\t'); pos = stoul(tmp);
+        getline(ss, tmp, '\n'); depth = stoul(tmp);
 
         // check if low-depth or not
         if(depth < MIN_DEPTH) {
