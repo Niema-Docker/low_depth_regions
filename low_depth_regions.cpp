@@ -1,4 +1,5 @@
 // Given a samtools depth file, output all regions below the threshold
+// Version: 1.0.0
 // Compile: g++ -O3 -o low_depth_regions low_depth_regions.cpp
 
 // constants
