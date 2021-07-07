@@ -1,5 +1,5 @@
 # Minimal Docker image for low_depth_regions using Alpine base
-FROM alpine:latest
+FROM alpine:3.13.5
 MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 
 # install low_depth_regions
